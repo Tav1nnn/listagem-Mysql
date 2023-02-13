@@ -25,4 +25,22 @@ export const addUser = (req,res)=>{
 
         return res.status(200).json("Usuário criado com sucesso")
     })
+
+}
+export const updateUser = (req,res) =>{
+    const update =
+    "UPDATE user SET `nome` = ?,`email` = ?,`fone` = ?,`data` = ? WHERE `id` = ?";
+
+    const values = [
+        req.body.nome,
+        req.body.email,
+        req.body.fone,
+        req.body.data
+    ]
+    
+    db.query(update, [...values, req.params.id], (err) =>{
+        if(err) return res.json(err)
+
+        return res.status(200).json("Usuario atualizado com sucesso")
+    })
 }
